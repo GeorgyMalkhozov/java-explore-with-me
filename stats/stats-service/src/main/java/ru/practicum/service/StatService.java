@@ -11,6 +11,7 @@ import ru.practicum.dto.HitDTO;
 import ru.practicum.dto.StatsDTO;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,13 @@ public class StatService {
     }
 
     public List<StatsDTO> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
-         return statsRepository.getStats(start, end, uris, unique).stream()
+        List<Stats> stats;
+        if(uris == null) {
+            stats = statsRepository.getStatsByTimeInterval(start, end, unique);
+        } else {
+            stats = statsRepository.getStatsByUrisAndByTimeInterval(start, end, uris, unique);
+        }
+        return stats.stream()
                  .sorted(Comparator.comparing(Stats::getHits).reversed())
                  .map(statsMapper::statsToStatsDTO)
                  .collect(Collectors.toList());
