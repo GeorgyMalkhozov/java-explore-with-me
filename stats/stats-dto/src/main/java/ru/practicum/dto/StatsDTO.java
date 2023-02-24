@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 public class StatsDTO {
 
     private String app;
-    @NotBlank(message ="поле uri не должно быть пустым")
+    @NotBlank(message = "поле uri не должно быть пустым")
     private String uri;
     private Long hits;
 }
