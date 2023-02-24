@@ -2,16 +2,15 @@ package ru.practicum.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.practicum.dto.HitDTO;
+import ru.practicum.dto.StatsDTO;
 import ru.practicum.mapper.HitMapper;
 import ru.practicum.mapper.StatsMapper;
 import ru.practicum.model.Hit;
 import ru.practicum.model.Stats;
 import ru.practicum.repository.StatRepository;
-import ru.practicum.dto.HitDTO;
-import ru.practicum.dto.StatsDTO;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
