@@ -13,7 +13,7 @@ public interface StatRepository extends JpaRepository<Hit, Integer> {
     @Query("SELECT new ru.practicum.model.Stats(hit.app, hit.uri, " +
             "(CASE WHEN (:unique = true) THEN count(distinct hit.ip) ELSE count(hit.ip) END)) " +
             "FROM Hit AS hit " +
-            "WHERE hit.timestamp > :start AND hit.timestamp < :end AND hit.uri IN :uri " +
+            "WHERE hit.timestamp > :start AND hit.timestamp < :end AND hit.uri IN :uris " +
             "GROUP BY hit.app, hit.uri ")
-    List<Stats> getStats(LocalDateTime start, LocalDateTime end, List<String> uri, boolean unique);
+    List<Stats> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique);
 }

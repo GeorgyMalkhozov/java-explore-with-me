@@ -35,9 +35,9 @@ public class StatService {
         return hitMapper.hitToHitDTO(hit);
     }
 
-    public List<StatsDTO> getStats(LocalDateTime start, LocalDateTime end, List<String> uri, boolean unique) {
-         return statsRepository.getStats(start, end, uri, unique).stream()
-                 .sorted(Comparator.comparing(Stats::getHits))
+    public List<StatsDTO> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
+         return statsRepository.getStats(start, end, uris, unique).stream()
+                 .sorted(Comparator.comparing(Stats::getHits).reversed())
                  .map(statsMapper::statsToStatsDTO)
                  .collect(Collectors.toList());
     }

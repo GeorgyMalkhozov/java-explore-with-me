@@ -27,12 +27,12 @@ private final StatService statService;
 
     @GetMapping("/stats")
     public List<StatsDTO> getStats(
-            @RequestParam("start")
+            @RequestParam
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
-            @RequestParam("end")
+            @RequestParam
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
-            @RequestParam (required = false) List<String> uri,
-            @RequestParam (required = false) boolean unique) {
-        return statService.getStats(start, end, uri, unique);
+            @RequestParam(required = false) List<String> uris,
+            @RequestParam(required = false) boolean unique) {
+        return statService.getStats(start, end, uris, unique);
     }
 }
