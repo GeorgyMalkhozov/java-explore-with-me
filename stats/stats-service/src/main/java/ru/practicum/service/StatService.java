@@ -37,7 +37,7 @@ public class StatService {
 
     public List<StatsDTO> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
         List<Stats> stats;
-        if(uris == null) {
+        if (uris == null) {
             stats = statsRepository.getStatsByTimeInterval(start, end, unique);
         } else {
             stats = statsRepository.getStatsByUrisAndByTimeInterval(start, end, uris, unique);
