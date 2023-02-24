@@ -28,9 +28,9 @@ private final StatService statService;
     @GetMapping("/stats")
     public List<StatsDTO> getStats(
             @RequestParam("start")
-            @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
             @RequestParam("end")
-            @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime end,
+            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
             @RequestParam (required = false) List<String> uri,
             @RequestParam (required = false) boolean unique) {
         return statService.getStats(start, end, uri, unique);
