@@ -9,6 +9,5 @@ import ru.practicum.user.model.User;
 public interface UserMapper {
 
     UserDto userToUserDto(User user);
-    
     User newUserRequestToUser(NewUserRequest newUserRequest);
 }
