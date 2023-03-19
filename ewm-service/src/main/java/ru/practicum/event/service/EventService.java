@@ -76,7 +76,8 @@ public class EventService {
             Boolean onlyAvailable, String sort, Integer from, Integer size) {
 
         EventSortType sortConverted = EventSortType.EVENT_DATE;
-        if (sort != null) { sortConverted = EventSortType.convert(sort.toUpperCase()); }
+        if (sort != null) {
+            sortConverted = EventSortType.convert(sort.toUpperCase()); }
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Event> cr = cb.createQuery(Event.class);
         Root<Event> rootEvent = cr.from(Event.class);
@@ -173,11 +174,16 @@ public class EventService {
                                                         LocalDateTime start, LocalDateTime end,
                                                         List<EventState> statesList, CriteriaBuilder cb,
                                                         Root<Event> root, Predicate predicate) {
-        if (users != null) { predicate = cb.and(predicate, root.get("initiator").in(users)); }
-        if (!statesList.isEmpty()) { predicate = cb.and(predicate, root.get("state").in(statesList)); }
-        if (categories != null) { predicate = cb.and(predicate, root.get("category").in(categories)); }
-        if (start != null) { predicate = cb.and(predicate, cb.greaterThan(root.get("eventDate"), start)); }
-        if (end != null) { predicate = cb.and(predicate, cb.lessThan(root.get("eventDate"), end)); }
+        if (users != null) {
+            predicate = cb.and(predicate, root.get("initiator").in(users)); }
+        if (!statesList.isEmpty()) {
+            predicate = cb.and(predicate, root.get("state").in(statesList)); }
+        if (categories != null) {
+            predicate = cb.and(predicate, root.get("category").in(categories)); }
+        if (start != null) {
+            predicate = cb.and(predicate, cb.greaterThan(root.get("eventDate"), start)); }
+        if (end != null) {
+            predicate = cb.and(predicate, cb.lessThan(root.get("eventDate"), end)); }
         return predicate;
     }
 
@@ -191,13 +197,16 @@ public class EventService {
             predicate = cb.or(predicate, cb.like(cb.lower(rootEvent.get("annotation")),
                     "%" + text.toLowerCase() + "%"));
         }
-        if (categories != null) { predicate = cb.and(predicate, rootEvent.get("category").in(categories)); }
+        if (categories != null) {
+            predicate = cb.and(predicate, rootEvent.get("category").in(categories)); }
         if (paid != null) {
             predicate = paid ? cb.and(predicate, cb.isTrue(rootEvent.get("paid")))
                     : cb.and(predicate, cb.isFalse(rootEvent.get("paid")));
         }
-        if (start != null) { predicate = cb.and(predicate, cb.greaterThan(rootEvent.get("eventDate"), start)); }
-        if (end != null) { predicate = cb.and(predicate, cb.lessThan(rootEvent.get("eventDate"), end)); }
+        if (start != null) {
+            predicate = cb.and(predicate, cb.greaterThan(rootEvent.get("eventDate"), start)); }
+        if (end != null) {
+            predicate = cb.and(predicate, cb.lessThan(rootEvent.get("eventDate"), end)); }
         if (start == null && end == null) {
             predicate = cb.and(predicate, cb.greaterThan(rootEvent.get("eventDate"),
                     LocalDateTime.now()));

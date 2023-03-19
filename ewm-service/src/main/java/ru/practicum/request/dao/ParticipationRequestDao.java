@@ -62,7 +62,8 @@ public class ParticipationRequestDao {
     public void checkEventIsNotFullyBooked(Event event) {
         Long bookedSpaces = participationRequestRepository.countAllByEventIdAndStatus(event.getId(),
                 ParticipationRequestStatus.CONFIRMED);
-        if (event.getParticipantLimit().equals(0L)) { return; }
+        if (event.getParticipantLimit().equals(0L)) {
+            return; }
         if (Objects.equals(bookedSpaces, event.getParticipantLimit())) {
             massCancelRequestsWhenEventIsFull(event.getId());
             throw new ConflictException("Не осталось свободных мест для участия в событии");
@@ -75,7 +76,8 @@ public class ParticipationRequestDao {
         participationRequest.setCreated(LocalDateTime.now());
         participationRequest.setStatus(ParticipationRequestStatus.PENDING);
         if (Boolean.FALSE.equals(event.getRequestModeration())) {
-            participationRequest.setStatus(ParticipationRequestStatus.CONFIRMED); }
+            participationRequest.setStatus(ParticipationRequestStatus.CONFIRMED);
+        }
     }
 
     public void saveRequest(ParticipationRequest participationRequest) {

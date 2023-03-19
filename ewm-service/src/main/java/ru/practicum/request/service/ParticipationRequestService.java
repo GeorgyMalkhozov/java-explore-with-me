@@ -66,8 +66,8 @@ public class ParticipationRequestService {
     public List<ParticipationRequestDto> getAllRequestsByUser(Long userId) {
 
         userDao.checkUserExist(userId);
-        List<ParticipationRequest> participationRequests = participationRequestRepository.
-                findAllByRequesterIdOrderByIdAsc(userId);
+        List<ParticipationRequest> participationRequests = participationRequestRepository
+                .findAllByRequesterIdOrderByIdAsc(userId);
         return participationRequests.stream()
                 .map(participationRequestMapper::participationRequestToDto)
                 .collect(Collectors.toList());

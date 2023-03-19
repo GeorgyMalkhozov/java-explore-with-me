@@ -77,13 +77,17 @@ public class EventDao {
     }
 
     public void eventStateUserActionProcessing(Event event, String eventStateAction) {
-        if (eventStateAction == null) { return;}
+        if (eventStateAction == null) {
+            return;
+        }
         event.setState(EventStateActionUser.convert(eventStateAction)
                 .equals(EventStateActionUser.CANCEL_REVIEW) ? EventState.CANCELED : EventState.PENDING);
     }
 
     public void eventStateAdminActionProcessing(Event event, String eventStateAction) {
-        if (eventStateAction == null) { return;}
+        if (eventStateAction == null) {
+            return;
+        }
         checkEventStateReadyForConfirmOrDecline(event);
         if (EventStateActionAdmin.convert(eventStateAction).equals(EventStateActionAdmin.PUBLISH_EVENT)) {
             event.setState(EventState.PUBLISHED);

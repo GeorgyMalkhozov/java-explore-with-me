@@ -34,7 +34,7 @@ public class CompilationService {
         Compilation compilation = compilationMapper.newCompilationDtoToCompilation(dto);
         compilationDao.enrichCompilationWithEventEntities(compilation, new ArrayList<>(dto.getEvents()));
         compilationDao.saveCompilation(compilation);
-        return compilationMapper.CompilationToCompilationDto(compilation);
+        return compilationMapper.compilationToCompilationDto(compilation);
     }
 
     public void deleteCompilation(Long id) {
@@ -48,12 +48,12 @@ public class CompilationService {
         compilationMapper.updateCompilationFromUpdateCompilationDto(dto, compilation);
         compilationDao.enrichCompilationWithEventEntities(compilation, new ArrayList<>(dto.getEvents()));
         compilationDao.saveCompilation(compilation);
-        return compilationMapper.CompilationToCompilationDto(compilation);
+        return compilationMapper.compilationToCompilationDto(compilation);
     }
 
     public CompilationDto getCompilation(Long compilationId) {
         compilationDao.checkCompilationExist(compilationId);
-        return compilationMapper.CompilationToCompilationDto(compilationDao.getCompilationById(compilationId));
+        return compilationMapper.compilationToCompilationDto(compilationDao.getCompilationById(compilationId));
     }
 
     public List<CompilationDto> getCompilationsByFilter(Boolean pinned, Integer from, Integer size) {
@@ -66,7 +66,7 @@ public class CompilationService {
         }
 
         return compilations.stream()
-                .map(compilationMapper::CompilationToCompilationDto)
+                .map(compilationMapper::compilationToCompilationDto)
                 .collect(Collectors.toList());
     }
 }
