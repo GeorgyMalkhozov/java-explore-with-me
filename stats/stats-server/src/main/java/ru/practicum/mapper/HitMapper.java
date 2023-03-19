@@ -1,28 +1,13 @@
 package ru.practicum.mapper;
 
-import org.springframework.stereotype.Component;
-import ru.practicum.model.Hit;
+import org.mapstruct.Mapper;
 import ru.practicum.dto.HitDTO;
+import ru.practicum.model.Hit;
 
-@Component
-public class HitMapper {
+@Mapper(componentModel = "spring")
+public interface HitMapper {
 
-    public Hit hitDTOToHit(HitDTO dto) {
-        return Hit.builder()
-                .app(dto.getApp())
-                .uri(dto.getUri())
-                .ip(dto.getIp())
-                .timestamp(dto.getTimestamp())
-                .build();
-    }
+    Hit hitDTOToHit(HitDTO dto);
 
-   public HitDTO hitToHitDTO(Hit hit) {
-       return HitDTO.builder()
-               .id(hit.getId())
-               .app(hit.getApp())
-               .uri(hit.getUri())
-               .ip(hit.getIp())
-               .timestamp(hit.getTimestamp())
-               .build();
-   }
+    HitDTO hitToHitDTO(Hit hit);
 }

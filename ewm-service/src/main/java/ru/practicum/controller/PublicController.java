@@ -1,29 +1,40 @@
 package ru.practicum.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.service.CategoryService;
+import ru.practicum.client.StatClient;
+import ru.practicum.compilation.service.CompilationService;
 import ru.practicum.event.service.EventService;
-import ru.practicum.user.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/public")
 public class PublicController {
 
-    private final UserService userService;
     private final CategoryService categoryService;
     private final EventService eventService;
+    private final CompilationService compilationService;
+    private final StatClient statClient;
 
-    public PublicController(UserService userService, CategoryService categoryService, EventService eventService) {
-        this.userService = userService;
+    @Autowired
+    public PublicController(CategoryService categoryService, EventService eventService,
+                            CompilationService compilationService,
+                            StatClient statClient
+                            ) {
         this.categoryService = categoryService;
         this.eventService = eventService;
+        this.compilationService = compilationService;
+        this.statClient = statClient;
     }
 
     @GetMapping("/categories")
@@ -40,7 +51,8 @@ public class PublicController {
     }
 
     @GetMapping("/events/{eventId}")
-    public ResponseEntity<Object> getPublishedEvent(@PathVariable Long eventId) {
+    public ResponseEntity<Object> getPublishedEvent(@PathVariable Long eventId, HttpServletRequest httpServletRequest) {
+        statClient.addHit(httpServletRequest);
         return new ResponseEntity<>(eventService.getPublishedEvent(eventId), HttpStatus.OK);
     }
 
@@ -48,17 +60,33 @@ public class PublicController {
     public ResponseEntity<Object> getPublishedEvents(
             @RequestParam(required = false) String text,
             @RequestParam(required = false) List<Integer> categories,
-            @RequestParam(required = false) boolean paid,
+            @RequestParam(required = false) Boolean paid,
             @RequestParam(required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
             @RequestParam(required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
-            @RequestParam(defaultValue = "false") boolean onlyAvailable,
+            @RequestParam(defaultValue = "false") Boolean onlyAvailable,
             @RequestParam(required = false) String sort,
             @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
+            @RequestParam(defaultValue = "10") Integer size,
+            HttpServletRequest httpServletRequest
             ) {
+        statClient.addHit(httpServletRequest);
         return new ResponseEntity<>(eventService.getAllPublishedEventsByFilter(
                 text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size), HttpStatus.OK);
+    }
+
+    @GetMapping("/compilations/{compId}")
+    public ResponseEntity<Object> getCompilation(@PathVariable Long compId) {
+        return new ResponseEntity<>(compilationService.getCompilation(compId), HttpStatus.OK);
+    }
+
+    @GetMapping("/compilations")
+    public ResponseEntity<Object> getCompilations(
+            @RequestParam(required = false) Boolean pinned,
+            @RequestParam(defaultValue = "0") Integer from,
+            @RequestParam(defaultValue = "10") Integer size
+    ) {
+        return new ResponseEntity<>(compilationService.getCompilationsByFilter(pinned, from, size), HttpStatus.OK);
     }
 }

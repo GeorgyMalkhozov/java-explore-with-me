@@ -26,6 +26,9 @@ public class Event {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Transient
+    private Long confirmedRequests;
+
     @Column(name = "created_on")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdOn;
@@ -46,23 +49,26 @@ public class Event {
     private Location location;
 
     @Column(name = "paid", nullable = false)
-    private boolean paid;
+    private Boolean paid;
 
     @Column(name = "participant_limit")
-    private Integer participantLimit;
+    private Long participantLimit;
 
     @Column(name = "published_on")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime publishedOn;
 
     @Column(name = "request_moderation")
-    private boolean requestModeration;
+    private Boolean requestModeration;
 
     @Enumerated(EnumType.STRING)
     private EventState state;
 
     @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "views")
+    private Long views;
 
     public Long getId() {
         return id;
@@ -128,19 +134,19 @@ public class Event {
         this.location = location;
     }
 
-    public boolean isPaid() {
+    public Boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         this.paid = paid;
     }
 
-    public Integer getParticipantLimit() {
+    public Long getParticipantLimit() {
         return participantLimit;
     }
 
-    public void setParticipantLimit(Integer participantLimit) {
+    public void setParticipantLimit(Long participantLimit) {
         this.participantLimit = participantLimit;
     }
 
@@ -152,11 +158,11 @@ public class Event {
         this.publishedOn = publishedOn;
     }
 
-    public boolean isRequestModeration() {
+    public Boolean getRequestModeration() {
         return requestModeration;
     }
 
-    public void setRequestModeration(boolean requestModeration) {
+    public void setRequestModeration(Boolean requestModeration) {
         this.requestModeration = requestModeration;
     }
 
@@ -174,5 +180,21 @@ public class Event {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getConfirmedRequests() {
+        return confirmedRequests;
+    }
+
+    public void setConfirmedRequests(Long confirmedRequests) {
+        this.confirmedRequests = confirmedRequests;
+    }
+
+    public Long getViews() {
+        return views;
+    }
+
+    public void setViews(Long views) {
+        this.views = views;
     }
 }

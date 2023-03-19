@@ -1,7 +1,6 @@
 package ru.practicum.request.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import ru.practicum.event.enums.EventState;
 import ru.practicum.request.enums.ParticipationRequestStatus;
 
 import java.time.LocalDateTime;

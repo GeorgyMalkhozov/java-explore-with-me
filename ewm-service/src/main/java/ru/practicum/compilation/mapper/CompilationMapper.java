@@ -1,6 +1,5 @@
 package ru.practicum.compilation.mapper;
 
-
 import org.mapstruct.*;
 import org.springframework.validation.annotation.Validated;
 import ru.practicum.category.mapper.CategoryMapper;

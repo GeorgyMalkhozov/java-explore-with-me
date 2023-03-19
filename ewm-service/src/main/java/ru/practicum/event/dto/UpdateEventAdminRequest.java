@@ -13,9 +13,9 @@ public class UpdateEventAdminRequest {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate;
     private Location location;
-    private boolean paid;
-    private Integer participantLimit;
-    private boolean requestModeration;
+    private Boolean paid;
+    private Long participantLimit;
+    private Boolean requestModeration;
     private String title;
     private String stateAction;
 
@@ -59,27 +59,27 @@ public class UpdateEventAdminRequest {
         this.location = location;
     }
 
-    public boolean isPaid() {
+    public Boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         this.paid = paid;
     }
 
-    public Integer getParticipantLimit() {
+    public Long getParticipantLimit() {
         return participantLimit;
     }
 
-    public void setParticipantLimit(Integer participantLimit) {
+    public void setParticipantLimit(Long participantLimit) {
         this.participantLimit = participantLimit;
     }
 
-    public boolean isRequestModeration() {
+    public Boolean getRequestModeration() {
         return requestModeration;
     }
 
-    public void setRequestModeration(boolean requestModeration) {
+    public void setRequestModeration(Boolean requestModeration) {
         this.requestModeration = requestModeration;
     }
 

@@ -2,7 +2,6 @@ package ru.practicum.request.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.validation.annotation.Validated;
-import ru.practicum.event.enums.EventState;
 import ru.practicum.event.model.Event;
 import ru.practicum.request.enums.ParticipationRequestStatus;
 import ru.practicum.user.model.User;
@@ -72,5 +71,16 @@ public class ParticipationRequest {
 
     public void setStatus(ParticipationRequestStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "ParticipationRequest{" +
+                "id=" + id +
+                ", event=" + event +
+                ", requester=" + requester +
+                ", created=" + created +
+                ", status=" + status +
+                '}';
     }
 }

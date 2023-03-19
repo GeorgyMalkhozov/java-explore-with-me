@@ -2,9 +2,8 @@ package ru.practicum.compilation.dto;
 
 import org.springframework.validation.annotation.Validated;
 import ru.practicum.event.dto.EventShortDto;
-import ru.practicum.event.model.Event;
 
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Validated
@@ -13,6 +12,7 @@ public class CompilationDto {
     private Set<EventShortDto> events;
     private Long id;
     private boolean pinned;
+    @NotBlank(message = "Название компиляции не должно быть пустым")
     private String title;
 
     public Set<EventShortDto> getEvents() {

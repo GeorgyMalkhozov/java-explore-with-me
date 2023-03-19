@@ -2,8 +2,9 @@ package ru.practicum.exceptions.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.exceptions.ConflictException;
 import ru.practicum.exceptions.NoObjectsFoundException;
 import ru.practicum.exceptions.NoSuchStateException;
@@ -38,7 +39,7 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @ExceptionHandler({NoSuchStateException.class})
+    @ExceptionHandler({NoSuchStateException.class, MethodArgumentNotValidException.class})
     protected ResponseEntity<Object> handleBadRequest(Exception exception) {
         ApiError apiError = new ApiError(
                 List.of(exception.getClass().getSimpleName()),

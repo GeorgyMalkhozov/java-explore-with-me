@@ -1,25 +1,34 @@
 package ru.practicum.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import ru.practicum.category.dto.CategoryDto;
-import ru.practicum.event.enums.EventState;
+import org.springframework.validation.annotation.Validated;
 import ru.practicum.location.dto.LocationDto;
-import ru.practicum.location.model.Location;
-import ru.practicum.user.dto.UserShortDto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+@Validated
 public class NewEventDto {
 
+    @Size(min = 20, max = 2000, message = "аннотация должна быть от 20 до 7000 символов")
+    @NotNull(message = "аннотация должна быть от 20 до 7000 символов")
     private String annotation;
+    @NotNull(message = "категория не должна быть пустой")
     private Long category;
+    @Size(min = 20, max = 7000, message = "описание должно быть от 20 до 7000 символов")
+    @NotNull(message = "описание должно быть от 20 до 7000 символов")
     private String description;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @NotNull(message = "дата события не должна быть пустой")
     private LocalDateTime eventDate;
+    @NotNull(message = "локация не должна быть пустой")
     private LocationDto location;
-    private boolean paid;
-    private Integer participantLimit;
-    private boolean requestModeration;
+    private Boolean paid;
+    private Long participantLimit;
+    private Boolean requestModeration;
+    @Size(min = 3, max = 120, message = "название должно быть от 3 до 120 символов")
+    @NotNull(message = "название должно быть от 3 до 120 символов")
     private String title;
 
     public String getAnnotation() {
@@ -62,27 +71,27 @@ public class NewEventDto {
         this.location = location;
     }
 
-    public boolean isPaid() {
+    public Boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         this.paid = paid;
     }
 
-    public Integer getParticipantLimit() {
+    public Long getParticipantLimit() {
         return participantLimit;
     }
 
-    public void setParticipantLimit(Integer participantLimit) {
+    public void setParticipantLimit(Long participantLimit) {
         this.participantLimit = participantLimit;
     }
 
-    public boolean isRequestModeration() {
+    public Boolean getRequestModeration() {
         return requestModeration;
     }
 
-    public void setRequestModeration(boolean requestModeration) {
+    public void setRequestModeration(Boolean requestModeration) {
         this.requestModeration = requestModeration;
     }
 

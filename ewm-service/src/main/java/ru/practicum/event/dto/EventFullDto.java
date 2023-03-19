@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.event.enums.EventState;
 import ru.practicum.location.dto.LocationDto;
-import ru.practicum.location.model.Location;
 import ru.practicum.user.dto.UserShortDto;
 
 import java.time.LocalDateTime;
@@ -13,6 +12,8 @@ public class EventFullDto {
 
     private String annotation;
     private CategoryDto category;
+
+    private Long confirmedRequests;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdOn;
     private String description;
@@ -21,21 +22,14 @@ public class EventFullDto {
     private Long id;
     private UserShortDto initiator;
     private LocationDto location;
-    private boolean paid;
-    private Integer participantLimit;
+    private Boolean paid;
+    private Long participantLimit;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime publishedOn;
-    private boolean requestModeration;
+    private Boolean requestModeration;
     private EventState state;
     private String title;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Long views;
 
     public String getAnnotation() {
         return annotation;
@@ -77,6 +71,14 @@ public class EventFullDto {
         this.eventDate = eventDate;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public UserShortDto getInitiator() {
         return initiator;
     }
@@ -93,19 +95,19 @@ public class EventFullDto {
         this.location = location;
     }
 
-    public boolean isPaid() {
+    public Boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         this.paid = paid;
     }
 
-    public Integer getParticipantLimit() {
+    public Long getParticipantLimit() {
         return participantLimit;
     }
 
-    public void setParticipantLimit(Integer participantLimit) {
+    public void setParticipantLimit(Long participantLimit) {
         this.participantLimit = participantLimit;
     }
 
@@ -117,11 +119,11 @@ public class EventFullDto {
         this.publishedOn = publishedOn;
     }
 
-    public boolean isRequestModeration() {
+    public Boolean getRequestModeration() {
         return requestModeration;
     }
 
-    public void setRequestModeration(boolean requestModeration) {
+    public void setRequestModeration(Boolean requestModeration) {
         this.requestModeration = requestModeration;
     }
 
@@ -139,5 +141,21 @@ public class EventFullDto {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getConfirmedRequests() {
+        return confirmedRequests;
+    }
+
+    public void setConfirmedRequests(Long confirmedRequests) {
+        this.confirmedRequests = confirmedRequests;
+    }
+
+    public Long getViews() {
+        return views;
+    }
+
+    public void setViews(Long views) {
+        this.views = views;
     }
 }

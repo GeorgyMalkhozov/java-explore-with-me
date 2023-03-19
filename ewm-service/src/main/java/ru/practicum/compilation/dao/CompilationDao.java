@@ -48,6 +48,7 @@ public class CompilationDao {
     }
 
     public void enrichCompilationWithEventEntities(Compilation compilation, List<Long> eventIds) {
-        compilation.setEvents(new HashSet<>(eventRepository.findAllByIdIn(eventIds)));
+        Set<Event> events = new HashSet<>(eventRepository.findAllByIdIn(eventIds));
+        compilation.setEvents(events);
     }
 }

@@ -2,8 +2,6 @@ package ru.practicum.location.dto;
 
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.*;
-
 @Validated
 public class LocationDto {
 

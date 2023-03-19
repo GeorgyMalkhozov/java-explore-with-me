@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.dto.NewCategoryDto;
 import ru.practicum.category.service.CategoryService;
 import ru.practicum.compilation.dto.NewCompilationDto;
+import ru.practicum.compilation.dto.UpdateCompilationDto;
 import ru.practicum.compilation.service.CompilationService;
 import ru.practicum.event.dto.UpdateEventAdminRequest;
 import ru.practicum.event.service.EventService;
@@ -37,7 +39,7 @@ public class AdminController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Object> addUser(@RequestBody NewUserRequest dto) {
+    public ResponseEntity<Object> addUser(@RequestBody @Validated NewUserRequest dto) {
         return new ResponseEntity<>(userService.addUser(dto), HttpStatus.CREATED);
     }
 
@@ -57,7 +59,7 @@ public class AdminController {
     }
 
     @PostMapping("/categories")
-    public ResponseEntity<Object> addCategory(@RequestBody NewCategoryDto dto) {
+    public ResponseEntity<Object> addCategory(@RequestBody @Validated NewCategoryDto dto) {
         return new ResponseEntity<>(categoryService.addCategory(dto), HttpStatus.CREATED);
     }
 
@@ -68,15 +70,15 @@ public class AdminController {
     }
 
     @PatchMapping("/categories/{catId}")
-    public CategoryDto updateCategory(@PathVariable Long catId, @RequestBody CategoryDto updateDto) {
+    public CategoryDto updateCategory(@PathVariable Long catId, @RequestBody @Validated NewCategoryDto updateDto) {
         return categoryService.updateCategory(catId, updateDto);
     }
 
     @GetMapping("/events")
     public ResponseEntity<Object> getEventsByAdminWithFilter(
-            @RequestParam(required = false) List<Integer> users,
+            @RequestParam(required = false) List<Long> users,
             @RequestParam(required = false) List<String> states,
-            @RequestParam(required = false) List<Integer> categories,
+            @RequestParam(required = false) List<Long> categories,
             @RequestParam(required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
             @RequestParam(required = false)
@@ -95,7 +97,19 @@ public class AdminController {
     }
 
     @PostMapping("/compilations")
-    public ResponseEntity<Object> addCompilation(@RequestBody NewCompilationDto dto) {
+    public ResponseEntity<Object> addCompilation(@RequestBody @Validated NewCompilationDto dto) {
         return new ResponseEntity<>(compilationService.addCompilation(dto), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/compilations/{compId}")
+    public ResponseEntity<Object> deleteCompilation(@PathVariable Long compId) {
+        compilationService.deleteCompilation(compId);
+        return new ResponseEntity<>("Подборка удалена", HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/compilations/{compId}")
+    public ResponseEntity<Object> updateCompilation(@PathVariable Long compId,
+                                              @RequestBody UpdateCompilationDto updateDto) {
+        return new ResponseEntity<>(compilationService.updateCompilation(compId, updateDto), HttpStatus.OK);
     }
 }

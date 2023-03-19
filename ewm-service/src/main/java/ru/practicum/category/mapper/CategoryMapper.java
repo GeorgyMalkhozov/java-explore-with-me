@@ -17,5 +17,5 @@ public interface CategoryMapper {
     Category newCategoryDtoToCategory(NewCategoryDto newCategoryDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateCategoryFromDto(CategoryDto updateDTO, @MappingTarget @Validated Category category);
+    void updateCategoryFromDto(NewCategoryDto updateDTO, @MappingTarget @Validated Category category);
 }

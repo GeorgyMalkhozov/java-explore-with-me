@@ -13,13 +13,13 @@ import ru.practicum.user.mapper.UserMapper;
 public interface EventMapper {
 
     @Mapping(target = "category", ignore = true)
-  //  @Mapping(target = "confirmedRequests", ignore = true)
     @Mapping(target = "createdOn", ignore = true)
     @Mapping(target = "initiator", ignore = true)
     @Mapping(target = "state", ignore = true)
     @Mapping(target = "location", ignore = true)
     @Mapping(target = "publishedOn", ignore = true)
-  //  @Mapping(target = "views", ignore = true)
+    @Mapping(target = "confirmedRequests", ignore = true)
+    @Mapping(target = "views", ignore = true)
     Event newEventDtoToEvent(NewEventDto dto);
 
     @Mapping(target = "category")
@@ -28,10 +28,14 @@ public interface EventMapper {
     @Mapping(target = "state")
     @Mapping(target = "location")
     @Mapping(target = "publishedOn")
+    @Mapping(target = "confirmedRequests")
+    @Mapping(target = "views")
     EventFullDto eventToEventFullDto(Event event);
 
     @Mapping(target = "category")
     @Mapping(target = "initiator")
+    @Mapping(target = "confirmedRequests")
+    @Mapping(target = "views")
     EventShortDto eventToEventShortDto(Event event);
 
     @Mapping(target = "category", ignore = true)
@@ -40,8 +44,11 @@ public interface EventMapper {
     @Mapping(target = "state", ignore = true)
     @Mapping(target = "location", ignore = true)
     @Mapping(target = "publishedOn", ignore = true)
+    @Mapping(target = "confirmedRequests", ignore = true)
+    @Mapping(target = "views", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEventFromUpdateEventUserDto(UpdateEventUserRequest updateEventUserRequest, @MappingTarget @Validated Event event);
+    void updateEventFromUpdateEventUserDto(UpdateEventUserRequest updateEventUserRequest,
+                                           @MappingTarget @Validated Event event);
 
     @Mapping(target = "category", ignore = true)
     @Mapping(target = "createdOn", ignore = true)
@@ -49,6 +56,8 @@ public interface EventMapper {
     @Mapping(target = "state", ignore = true)
     @Mapping(target = "location", ignore = true)
     @Mapping(target = "publishedOn", ignore = true)
+    @Mapping(target = "confirmedRequests", ignore = true)
+    @Mapping(target = "views", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEventFromAdminDto(UpdateEventAdminRequest updateAdminDto, @MappingTarget @Validated Event event);
 }

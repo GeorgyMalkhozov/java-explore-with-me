@@ -1,5 +1,6 @@
 package ru.practicum.event.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionSystemException;
@@ -11,7 +12,8 @@ import ru.practicum.event.repository.EventRepository;
 import ru.practicum.exceptions.ConflictException;
 import ru.practicum.exceptions.NoObjectsFoundException;
 import ru.practicum.exceptions.ValidationException;
-import ru.practicum.user.repository.UserRepository;
+import ru.practicum.request.enums.ParticipationRequestStatus;
+import ru.practicum.request.repository.ParticipationRequestRepository;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -20,11 +22,13 @@ import java.util.Objects;
 public class EventDao {
 
     private final EventRepository eventRepository;
-    private final UserRepository userRepository;
+    private final ParticipationRequestRepository participationRequestRepository;
 
-    public EventDao(EventRepository eventRepository, UserRepository userRepository) {
+    @Autowired
+    public EventDao(EventRepository eventRepository,
+                    ParticipationRequestRepository participationRequestRepository) {
         this.eventRepository = eventRepository;
-        this.userRepository = userRepository;
+        this.participationRequestRepository = participationRequestRepository;
     }
 
     public void checkEventExist(Long eventId) {
@@ -35,19 +39,22 @@ public class EventDao {
 
     public Event getEventById(Long id) {
         checkEventExist(id);
-        return eventRepository.getById(id);
+        Event event = eventRepository.getById(id);
+        event.setConfirmedRequests(participationRequestRepository.countAllByEventIdAndStatus(id,
+                ParticipationRequestStatus.CONFIRMED));
+        return event;
     }
 
     public void checkUserIsInitiator(Long userId, Event event) {
         if (!Objects.equals(event.getInitiator().getId(), userId)) {
-            throw new NoObjectsFoundException("Только владелец вещи может ее изменять");
+            throw new NoObjectsFoundException("Только инициатор события может вносить изменения");
         }
     }
 
-    public void checkEventTimeIsMoreThanHourLaterAfterPublishTime(Event event) {
-        if (LocalDateTime.now().plusHours(1).isAfter(event.getEventDate())) {
+    public void checkEventTimeIsMoreThanHoursLaterAfterPublishTime(Event event, Integer numberOfHours) {
+        if (LocalDateTime.now().plusHours(numberOfHours).isAfter(event.getEventDate())) {
             throw new ConflictException("Нельзя изменять событие: между началом события и " +
-                    "датой публикации менее 1 часа");
+                    "датой публикации менее " + numberOfHours + " часа");
         }
     }
 
@@ -63,9 +70,9 @@ public class EventDao {
         }
     }
 
-    public void checkIfEventCanBeModifiedByUser(Event event) {
+    public void checkIfEventCanBeModifiedByState(Event event) {
         if (event.getState().equals(EventState.PUBLISHED)) {
-            throw new ConflictException("Событие в статусе PUBLISHED не может быть изменено инициатором");
+            throw new ConflictException("Событие в статусе PUBLISHED не может быть изменено");
         }
     }
 
@@ -78,13 +85,17 @@ public class EventDao {
     public void eventStateAdminActionProcessing(Event event, String eventStateAction) {
         if (eventStateAction == null) { return;}
         checkEventStateReadyForConfirmOrDecline(event);
-        event.setState(EventStateActionAdmin.convert(eventStateAction)
-                .equals(EventStateActionAdmin.PUBLISH_EVENT) ? EventState.PUBLISHED : EventState.CANCELED);
+        if (EventStateActionAdmin.convert(eventStateAction).equals(EventStateActionAdmin.PUBLISH_EVENT)) {
+            event.setState(EventState.PUBLISHED);
+            event.setPublishedOn(LocalDateTime.now());
+        } else {
+            event.setState(EventState.CANCELED);
+        }
     }
 
     public void saveEvent(Event event) {
         try {
-            eventRepository.save(event);
+            eventRepository.saveAndFlush(event);
         } catch (TransactionSystemException e) {
             throw new ValidationException("поле name не может быть пустыми");
         } catch (DataIntegrityViolationException e) {
