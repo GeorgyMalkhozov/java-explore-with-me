@@ -9,19 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.dto.NewCategoryDto;
 import ru.practicum.category.service.CategoryService;
+import ru.practicum.category.service.CategoryServiceImpl;
 import ru.practicum.compilation.dto.NewCompilationDto;
 import ru.practicum.compilation.dto.UpdateCompilationDto;
 import ru.practicum.compilation.service.CompilationService;
+import ru.practicum.compilation.service.CompilationServiceImpl;
 import ru.practicum.event.dto.UpdateEventAdminRequest;
 import ru.practicum.event.service.EventService;
+import ru.practicum.event.service.EventServiceImpl;
 import ru.practicum.user.dto.NewUserRequest;
 import ru.practicum.user.service.UserService;
+import ru.practicum.user.service.UserServiceImpl;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/admin")
+@Validated
 public class AdminController {
 
     private final UserService userService;
@@ -30,8 +37,8 @@ public class AdminController {
     private final CompilationService compilationService;
 
     @Autowired
-    public AdminController(UserService userService, CategoryService categoryService, EventService eventService,
-                           CompilationService compilationService) {
+    public AdminController(UserServiceImpl userService, CategoryServiceImpl categoryService, EventServiceImpl eventService,
+                           CompilationServiceImpl compilationService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.eventService = eventService;
@@ -52,8 +59,8 @@ public class AdminController {
     @GetMapping("/users")
     public ResponseEntity<Object> getUsers(
             @RequestParam(required = false) List<Long> ids,
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
+            @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
+            @RequestParam(defaultValue = "10") @Positive Integer size
     ) {
         return new ResponseEntity<>(userService.getUsers(ids, from, size), HttpStatus.OK);
     }
@@ -83,8 +90,8 @@ public class AdminController {
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
             @RequestParam(required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
+            @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
+            @RequestParam(defaultValue = "10") @Positive Integer size
     ) {
         return new ResponseEntity<>(eventService.getEventsByAdminWithFilter(
                 users, states, categories, rangeStart, rangeEnd, from, size), HttpStatus.OK);

@@ -5,36 +5,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionSystemException;
 import ru.practicum.compilation.model.Compilation;
 import ru.practicum.compilation.repository.CompilationRepository;
-import ru.practicum.event.model.Event;
-import ru.practicum.event.repository.EventRepository;
 import ru.practicum.exceptions.ConflictException;
 import ru.practicum.exceptions.NoObjectsFoundException;
 import ru.practicum.exceptions.ValidationException;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Component
 public class CompilationDao {
 
     private final CompilationRepository compilationRepository;
-    private final EventRepository eventRepository;
 
-    public CompilationDao(CompilationRepository compilationRepository, EventRepository eventRepository) {
+    public CompilationDao(CompilationRepository compilationRepository) {
         this.compilationRepository = compilationRepository;
-        this.eventRepository = eventRepository;
-    }
-
-    public void checkCompilationExist(Long compilationId) {
-        if (!compilationRepository.findById(compilationId).isPresent()) {
-            throw new NoObjectsFoundException("Компиляция с id = " + compilationId + " не существует");
-        }
-    }
-
-    public Compilation getCompilationById(Long id) {
-        checkCompilationExist(id);
-        return compilationRepository.getById(id);
     }
 
     public void saveCompilation(Compilation compilation) {
@@ -47,8 +28,8 @@ public class CompilationDao {
         }
     }
 
-    public void enrichCompilationWithEventEntities(Compilation compilation, List<Long> eventIds) {
-        Set<Event> events = new HashSet<>(eventRepository.findAllByIdIn(eventIds));
-        compilation.setEvents(events);
+    public Compilation getCompilationById(Long id) {
+        return compilationRepository.findById(id).orElseThrow(() ->
+                new NoObjectsFoundException("Компиляция с id = " + id + " не существует"));
     }
 }

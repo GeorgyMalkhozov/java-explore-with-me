@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.event.dto.NewEventDto;
 import ru.practicum.event.dto.UpdateEventUserRequest;
 import ru.practicum.event.service.EventService;
+import ru.practicum.event.service.EventServiceImpl;
 import ru.practicum.request.dto.EventRequestStatusUpdateRequestDto;
 import ru.practicum.request.service.ParticipationRequestService;
+import ru.practicum.request.service.ParticipationRequestServiceImpl;
 
 import javax.validation.Valid;
 
@@ -18,8 +20,8 @@ public class PrivateController {
     private final EventService eventService;
     private final ParticipationRequestService participationRequestService;
 
-    public PrivateController(EventService eventService,
-                             ParticipationRequestService participationRequestService) {
+    public PrivateController(EventServiceImpl eventService,
+                             ParticipationRequestServiceImpl participationRequestService) {
         this.eventService = eventService;
         this.participationRequestService = participationRequestService;
     }

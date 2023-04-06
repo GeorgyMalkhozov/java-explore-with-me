@@ -5,8 +5,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionSystemException;
 import ru.practicum.event.enums.EventState;
-import ru.practicum.event.enums.EventStateActionAdmin;
-import ru.practicum.event.enums.EventStateActionUser;
 import ru.practicum.event.model.Event;
 import ru.practicum.event.repository.EventRepository;
 import ru.practicum.exceptions.ConflictException;
@@ -31,15 +29,19 @@ public class EventDao {
         this.participationRequestRepository = participationRequestRepository;
     }
 
-    public void checkEventExist(Long eventId) {
-        if (!eventRepository.findById(eventId).isPresent()) {
-            throw new NoObjectsFoundException("Событие с id = " + eventId + " не существует");
+    public void saveEvent(Event event) {
+        try {
+            eventRepository.saveAndFlush(event);
+        } catch (TransactionSystemException e) {
+            throw new ValidationException("поле name не может быть пустыми");
+        } catch (DataIntegrityViolationException e) {
+            throw new ConflictException("name должен быть уникальным");
         }
     }
 
     public Event getEventById(Long id) {
-        checkEventExist(id);
-        Event event = eventRepository.getById(id);
+        Event event = eventRepository.findById(id).orElseThrow(() ->
+                new NoObjectsFoundException("Событие  с id = " + id + " не существует"));
         event.setConfirmedRequests(participationRequestRepository.countAllByEventIdAndStatus(id,
                 ParticipationRequestStatus.CONFIRMED));
         return event;
@@ -73,37 +75,6 @@ public class EventDao {
     public void checkIfEventCanBeModifiedByState(Event event) {
         if (event.getState().equals(EventState.PUBLISHED)) {
             throw new ConflictException("Событие в статусе PUBLISHED не может быть изменено");
-        }
-    }
-
-    public void eventStateUserActionProcessing(Event event, String eventStateAction) {
-        if (eventStateAction == null) {
-            return;
-        }
-        event.setState(EventStateActionUser.convert(eventStateAction)
-                .equals(EventStateActionUser.CANCEL_REVIEW) ? EventState.CANCELED : EventState.PENDING);
-    }
-
-    public void eventStateAdminActionProcessing(Event event, String eventStateAction) {
-        if (eventStateAction == null) {
-            return;
-        }
-        checkEventStateReadyForConfirmOrDecline(event);
-        if (EventStateActionAdmin.convert(eventStateAction).equals(EventStateActionAdmin.PUBLISH_EVENT)) {
-            event.setState(EventState.PUBLISHED);
-            event.setPublishedOn(LocalDateTime.now());
-        } else {
-            event.setState(EventState.CANCELED);
-        }
-    }
-
-    public void saveEvent(Event event) {
-        try {
-            eventRepository.saveAndFlush(event);
-        } catch (TransactionSystemException e) {
-            throw new ValidationException("поле name не может быть пустыми");
-        } catch (DataIntegrityViolationException e) {
-            throw new ConflictException("name должен быть уникальным");
         }
     }
 }

@@ -14,14 +14,8 @@ public class UserDao {
         this.userRepository = userRepository;
     }
 
-    public void checkUserExist(Long userId) {
-        if (!userRepository.findById(userId).isPresent()) {
-            throw new NoObjectsFoundException("Пользователь с id = " + userId + " не существует");
-        }
-    }
-
     public User getUserById(Long id) {
-        checkUserExist(id);
-        return userRepository.getById(id);
+        return userRepository.findById(id).orElseThrow(() ->
+                new NoObjectsFoundException("Пользователь с id = " + id + " не существует"));
     }
 }

@@ -11,6 +11,8 @@ import ru.practicum.exceptions.NoSuchStateException;
 import ru.practicum.exceptions.ValidationException;
 import ru.practicum.exceptions.model.ApiError;
 
+import javax.validation.ConstraintViolationException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({ConflictException.class})
+    @ExceptionHandler({ConflictException.class, ConstraintViolationException.class, SQLException.class})
     protected ResponseEntity<Object> handleConflict(Exception exception) {
         ApiError apiError = new ApiError(
                 List.of(exception.getClass().getSimpleName()),
