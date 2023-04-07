@@ -1,17 +1,11 @@
 package ru.practicum.mapper;
 
-import org.springframework.stereotype.Component;
-import ru.practicum.model.Stats;
+import org.mapstruct.Mapper;
 import ru.practicum.dto.StatsDTO;
+import ru.practicum.model.Stats;
 
-@Component
-public class StatsMapper {
+@Mapper(componentModel = "spring")
+public interface StatsMapper {
 
-   public StatsDTO statsToStatsDTO(Stats stats) {
-       return StatsDTO.builder()
-               .app(stats.getApp())
-               .uri(stats.getUri())
-               .hits(stats.getHits())
-               .build();
-   }
+   StatsDTO statsToStatsDTO(Stats stats);
 }
