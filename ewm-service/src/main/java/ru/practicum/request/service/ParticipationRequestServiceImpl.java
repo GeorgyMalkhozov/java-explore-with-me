@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.event.dao.EventDao;
 import ru.practicum.event.model.Event;
 import ru.practicum.exceptions.ConflictException;
+import ru.practicum.exceptions.NoObjectsFoundException;
 import ru.practicum.request.dao.ParticipationRequestDao;
 import ru.practicum.request.dto.EventRequestStatusUpdateRequestDto;
 import ru.practicum.request.dto.EventRequestStatusUpdateResultDto;
@@ -15,7 +16,10 @@ import ru.practicum.request.mapper.ParticipationRequestMapper;
 import ru.practicum.request.model.ParticipationRequest;
 import ru.practicum.request.repository.ParticipationRequestRepository;
 import ru.practicum.user.dao.UserDao;
+import ru.practicum.user.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,27 +34,37 @@ public class ParticipationRequestServiceImpl implements ParticipationRequestServ
     private final UserDao userDao;
     private final ParticipationRequestDao participationRequestDao;
     private final EventDao eventDao;
+    private final EntityManager entityManager;
 
     public ParticipationRequestServiceImpl(ParticipationRequestRepository participationRequestRepository,
                                            ParticipationRequestMapper participationRequestMapper, UserDao userDao,
-                                           ParticipationRequestDao participationRequestDao, EventDao eventDao) {
+                                           ParticipationRequestDao participationRequestDao, EventDao eventDao,
+                                           EntityManager entityManager) {
         this.participationRequestRepository = participationRequestRepository;
         this.participationRequestMapper = participationRequestMapper;
         this.userDao = userDao;
         this.participationRequestDao = participationRequestDao;
         this.eventDao = eventDao;
+        this.entityManager = entityManager;
     }
 
     @Transactional
     public ParticipationRequestDto addParticipationRequest(Long userId, Long eventId) {
 
-        userDao.getUserById(userId);
-        Event event = eventDao.getEventById(eventId);
+        Query query = entityManager.createQuery(
+                "SELECT DISTINCT e, u FROM Event e, User u WHERE e.id = ?1 AND u.id = ?2")
+                .setParameter(1, eventId).setParameter(2, userId);
+        List<Object[]> extractedData = query.getResultList();
+        if (extractedData == null || extractedData.isEmpty() || extractedData.get(0).length <2) {
+            throw new NoObjectsFoundException("Событие или пользователь не существуют");
+        }
+        Event event = (Event)extractedData.get(0)[0];
+        User user = (User)extractedData.get(0)[1];
         eventDao.checkEventStateIsPublished(event);
         participationRequestDao.checkUserIsNotEventInitiatorBeforeNewRequest(userId, event);
         checkEventIsNotFullyBooked(event);
         ParticipationRequest participationRequest = new ParticipationRequest();
-        enrichNewRequestWithData(participationRequest, event, userId);
+        enrichNewRequestWithData(participationRequest, event, user);
         participationRequestDao.saveRequest(participationRequest);
         return participationRequestMapper.participationRequestToDto(participationRequest);
     }
@@ -182,8 +196,8 @@ public class ParticipationRequestServiceImpl implements ParticipationRequestServ
         participationRequestRepository.saveAllAndFlush(participationRequests);
     }
 
-    private void enrichNewRequestWithData(ParticipationRequest participationRequest, Event event, Long userId) {
-        participationRequest.setRequester(userDao.getUserById(userId));
+    private void enrichNewRequestWithData(ParticipationRequest participationRequest, Event event, User user) {
+        participationRequest.setRequester(user);
         participationRequest.setEvent(event);
         participationRequest.setCreated(LocalDateTime.now());
         participationRequest.setStatus(ParticipationRequestStatus.PENDING);
