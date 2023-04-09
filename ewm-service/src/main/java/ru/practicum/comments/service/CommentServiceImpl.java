@@ -76,7 +76,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto blockCommentByAdmin(Long commentId) {
         Comment comment = commentDao.getCommentById(commentId);
-        if (comment.getState().equals(CommentState.PUBLISHED)){
+        if (comment.getState().equals(CommentState.PUBLISHED)) {
             comment.setState(CommentState.BLOCKED);
             commentDao.saveComment(comment);
         } else {
