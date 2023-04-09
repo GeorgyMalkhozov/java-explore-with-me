@@ -55,7 +55,7 @@ public class ParticipationRequestServiceImpl implements ParticipationRequestServ
                 "SELECT DISTINCT e, u FROM Event e, User u WHERE e.id = ?1 AND u.id = ?2")
                 .setParameter(1, eventId).setParameter(2, userId);
         List<Object[]> extractedData = query.getResultList();
-        if (extractedData == null || extractedData.isEmpty() || extractedData.get(0).length <2) {
+        if (extractedData == null || extractedData.isEmpty() || extractedData.get(0).length < 2) {
             throw new NoObjectsFoundException("Событие или пользователь не существуют");
         }
         Event event = (Event)extractedData.get(0)[0];
