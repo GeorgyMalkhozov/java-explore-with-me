@@ -18,7 +18,7 @@
               "});\r",
               "pm.test(\"Тест: создание пользователя 1\", function () {\r",
               "    var jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.id, 'id').to.eql(63);\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(64);\r",
               "    pm.expect(jsonData.email, 'email').to.eql('ivanov@mail.ru');\r",
               "    pm.expect(jsonData.name, 'name').to.eql('Иван Иванов');\r",
               "});"
@@ -70,7 +70,7 @@
               "});\r",
               "pm.test(\"Тест: создание пользователя 1\", function () {\r",
               "    var jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.id, 'id').to.eql(64);\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(65);\r",
               "    pm.expect(jsonData.email, 'email').to.eql('petrov@mail.ru');\r",
               "    pm.expect(jsonData.name, 'name').to.eql('Петр Петров');\r",
               "});"
@@ -122,7 +122,7 @@
               "});\r",
               "pm.test(\"Тест: создание категории 1\", function () {\r",
               "    var jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.id, 'id').to.eql(55);\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(56);\r",
               "    pm.expect(jsonData.name, 'name').to.eql('Водный туризм');\r",
               "});"
             ],
@@ -173,7 +173,7 @@
               "});\r",
               "pm.test(\"Тест: создание события 1\", function () {\r",
               "    var jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.id, 'id').to.eql(38);\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(39);\r",
               "    pm.expect(jsonData.title, 'title').to.eql('Сплав на байдарках');\r",
               "});"
             ],
@@ -197,7 +197,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"annotation\": \"Сплав на байдарках похож на полет\",\r\n  \"category\": 55,\r\n  \"description\": \"Сплав на байдарках похож на полет. На спокойной воде — это парение. На бурной, порожистой — выполнение фигур высшего пилотажа. И то, и другое дарят чувство обновления, феерические эмоции, яркие впечатления.\",\r\n  \"eventDate\": \"2024-12-31 15:10:05\",\r\n  \"location\": {\r\n    \"lat\": 55.754167,\r\n    \"lon\": 37.62\r\n  },\r\n  \"paid\": true,\r\n  \"participantLimit\": 1,\r\n  \"requestModeration\": true,\r\n  \"title\": \"Сплав на байдарках\"\r\n}"
+          "raw": "{\r\n  \"annotation\": \"Сплав на байдарках похож на полет\",\r\n  \"category\": 56,\r\n  \"description\": \"Сплав на байдарках похож на полет. На спокойной воде — это парение. На бурной, порожистой — выполнение фигур высшего пилотажа. И то, и другое дарят чувство обновления, феерические эмоции, яркие впечатления.\",\r\n  \"eventDate\": \"2024-12-31 15:10:05\",\r\n  \"location\": {\r\n    \"lat\": 56.754167,\r\n    \"lon\": 37.62\r\n  },\r\n  \"paid\": true,\r\n  \"participantLimit\": 1,\r\n  \"requestModeration\": true,\r\n  \"title\": \"Сплав на байдарках\"\r\n}"
         },
         "url": {
           "raw": "{{baseUrl}}/users/:userId/events",
@@ -231,7 +231,7 @@
               "});\r",
               "pm.test(\"Тест: создание события 2\", function () {\r",
               "    var jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.id, 'id').to.eql(39);\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(40);\r",
               "    pm.expect(jsonData.title, 'title').to.eql('Сплав на плотах');\r",
               "});"
             ],
@@ -255,7 +255,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"annotation\": \"Сплав на плотах не похож на сплав на байдарках\",\r\n  \"category\": 55,\r\n  \"description\": \"Сплав на плотах 11111111111111111111111111111111111111111111111111\",\r\n  \"eventDate\": \"2024-12-31 15:10:05\",\r\n  \"location\": {\r\n    \"lat\": 55.754167,\r\n    \"lon\": 37.62\r\n  },\r\n  \"paid\": true,\r\n  \"participantLimit\": 5,\r\n  \"requestModeration\": true,\r\n  \"title\": \"Сплав на плотах\"\r\n}"
+          "raw": "{\r\n  \"annotation\": \"Сплав на плотах не похож на сплав на байдарках\",\r\n  \"category\": 56,\r\n  \"description\": \"Сплав на плотах 11111111111111111111111111111111111111111111111111\",\r\n  \"eventDate\": \"2024-12-31 15:10:05\",\r\n  \"location\": {\r\n    \"lat\": 56.754167,\r\n    \"lon\": 37.62\r\n  },\r\n  \"paid\": true,\r\n  \"participantLimit\": 5,\r\n  \"requestModeration\": true,\r\n  \"title\": \"Сплав на плотах\"\r\n}"
         },
         "url": {
           "raw": "{{baseUrl}}/users/:userId/events",
@@ -324,11 +324,11 @@
           "variable": [
             {
               "key": "userId",
-              "value": "64"
+              "value": "65"
             },
             {
               "key": "eventId",
-              "value": "38"
+              "value": "39"
             }
           ]
         }
@@ -347,67 +347,8 @@
               "});\r",
               "pm.test(\"Тест: публикация события 1\", function () {\r",
               "    var jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.id, 'id').to.eql(38);\r",
-              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на байдарках');\r",
-              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Accept",
-            "value": "*/*",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}"
-        },
-        "url": {
-          "raw": "{{baseUrl}}/admin/events/:eventId",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "admin",
-            "events",
-            ":eventId"
-          ],
-          "variable": [
-            {
-              "key": "eventId",
-              "value": "38"
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Publish event 2",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Статус 200\", function () {\r",
-              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
-              "});\r",
-              "pm.test(\"Тест: публикация события 2\", function () {\r",
-              "    var jsonData = pm.response.json();\r",
               "    pm.expect(jsonData.id, 'id').to.eql(39);\r",
-              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на плотах');\r",
+              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на байдарках');\r",
               "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
               "});"
             ],
@@ -454,6 +395,65 @@
       "response": []
     },
     {
+      "name": "Publish event 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: публикация события 2\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(40);\r",
+              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на плотах');\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/events/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "eventId",
+              "value": "40"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Add comment 1",
       "event": [
         {
@@ -467,8 +467,8 @@
               "    var jsonData = pm.response.json();\r",
               "    pm.expect(jsonData.id, 'id').to.eql(1);\r",
               "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #1');\r",
-              "    pm.expect(jsonData.event, 'event').to.eql(38);\r",
-              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(65);\r",
               "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
               "    pm.expect(jsonData.created, 'created').not.null;\r",
               "});"
@@ -509,11 +509,11 @@
           "variable": [
             {
               "key": "userId",
-              "value": "64"
+              "value": "65"
             },
             {
               "key": "eventId",
-              "value": "38"
+              "value": "39"
             }
           ]
         }
@@ -534,8 +534,8 @@
               "    var jsonData = pm.response.json();\r",
               "    pm.expect(jsonData.id, 'id').to.eql(2);\r",
               "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #2');\r",
-              "    pm.expect(jsonData.event, 'event').to.eql(38);\r",
-              "    pm.expect(jsonData.commentator, 'commentator').to.eql(63);\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
               "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
               "    pm.expect(jsonData.created, 'created').not.null;\r",
               "});"
@@ -576,11 +576,11 @@
           "variable": [
             {
               "key": "userId",
-              "value": "63"
+              "value": "64"
             },
             {
               "key": "eventId",
-              "value": "38"
+              "value": "39"
             }
           ]
         }
@@ -601,8 +601,8 @@
               "    var jsonData = pm.response.json();\r",
               "    pm.expect(jsonData.id, 'id').to.eql(3);\r",
               "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #3');\r",
-              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
-              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(40);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(65);\r",
               "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
               "    pm.expect(jsonData.created, 'created').not.null;\r",
               "});"
@@ -643,11 +643,11 @@
           "variable": [
             {
               "key": "userId",
-              "value": "64"
+              "value": "65"
             },
             {
               "key": "eventId",
-              "value": "39"
+              "value": "40"
             }
           ]
         }
@@ -668,8 +668,8 @@
               "    var jsonData = pm.response.json();\r",
               "    pm.expect(jsonData.id, 'id').to.eql(4);\r",
               "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #4');\r",
-              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
-              "    pm.expect(jsonData.commentator, 'commentator').to.eql(63);\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(40);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
               "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
               "    pm.expect(jsonData.created, 'created').not.null;\r",
               "});"
@@ -710,11 +710,11 @@
           "variable": [
             {
               "key": "userId",
-              "value": "63"
+              "value": "64"
             },
             {
               "key": "eventId",
-              "value": "39"
+              "value": "40"
             }
           ]
         }
@@ -880,8 +880,8 @@
               "    var jsonData = pm.response.json();\r",
               "    pm.expect(jsonData.id, 'id').to.eql(2);\r",
               "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #2');\r",
-              "    pm.expect(jsonData.event, 'event').to.eql(38);\r",
-              "    pm.expect(jsonData.commentator, 'commentator').to.eql(63);\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
               "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
               "    pm.expect(jsonData.created, 'created').not.null;\r",
               "});"
@@ -938,10 +938,10 @@
               "    pm.expect(jsonData.length, 'количество комментариев').to.eql(2);\r",
               "    pm.expect(jsonData[0].id, 'id').to.eql(2);\r",
               "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #2');\r",
-              "    pm.expect(jsonData[0].commentator, 'commentator').to.eql(63);\r",
+              "    pm.expect(jsonData[0].commentator, 'commentator').to.eql(64);\r",
               "    pm.expect(jsonData[1].id, 'id').to.eql(4);\r",
               "    pm.expect(jsonData[1].text, 'text').to.eql('Комментарий #4');\r",
-              "    pm.expect(jsonData[1].commentator, 'commentator').to.eql(63);\r",
+              "    pm.expect(jsonData[1].commentator, 'commentator').to.eql(64);\r",
               "});"
             ],
             "type": "text/javascript"
@@ -975,7 +975,7 @@
           "variable": [
             {
               "key": "userId",
-              "value": "63"
+              "value": "64"
             }
           ]
         }
@@ -1046,7 +1046,7 @@
               "    pm.expect(jsonData.length, 'количество комментариев').to.eql(1);\r",
               "    pm.expect(jsonData[0].id, 'id').to.eql(2);\r",
               "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #2');\r",
-              "    pm.expect(jsonData[0].commentator, 'commentator').to.eql(63);\r",
+              "    pm.expect(jsonData[0].commentator, 'commentator').to.eql(64);\r",
               "});"
             ],
             "type": "text/javascript"
@@ -1080,7 +1080,7 @@
           "variable": [
             {
               "key": "eventId",
-              "value": "38"
+              "value": "39"
             }
           ]
         }
@@ -1226,7 +1226,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/admin/comments?commentators=64",
+          "raw": "{{baseUrl}}/admin/comments?commentators=65",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1237,7 +1237,7 @@
           "query": [
             {
               "key": "commentators",
-              "value": "64"
+              "value": "65"
             }
           ]
         }
@@ -1282,7 +1282,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/admin/comments?events=39",
+          "raw": "{{baseUrl}}/admin/comments?events=40",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1293,7 +1293,7 @@
           "query": [
             {
               "key": "events",
-              "value": "39"
+              "value": "40"
             }
           ]
         }
@@ -1397,7 +1397,7 @@
           "variable": [
             {
               "key": "userId",
-              "value": "63"
+              "value": "64"
             },
             {
               "key": "commentId",
