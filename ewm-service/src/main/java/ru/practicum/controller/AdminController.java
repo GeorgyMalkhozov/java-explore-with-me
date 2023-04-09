@@ -10,6 +10,8 @@ import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.dto.NewCategoryDto;
 import ru.practicum.category.service.CategoryService;
 import ru.practicum.category.service.CategoryServiceImpl;
+import ru.practicum.comments.dto.CommentDto;
+import ru.practicum.comments.service.CommentService;
 import ru.practicum.compilation.dto.NewCompilationDto;
 import ru.practicum.compilation.dto.UpdateCompilationDto;
 import ru.practicum.compilation.service.CompilationService;
@@ -34,14 +36,17 @@ public class AdminController {
     private final UserService userService;
     private final CategoryService categoryService;
     private final EventService eventService;
+    private final CommentService commentService;
     private final CompilationService compilationService;
 
     @Autowired
-    public AdminController(UserServiceImpl userService, CategoryServiceImpl categoryService, EventServiceImpl eventService,
+    public AdminController(UserServiceImpl userService, CategoryServiceImpl categoryService,
+                           EventServiceImpl eventService, CommentService commentService,
                            CompilationServiceImpl compilationService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.eventService = eventService;
+        this.commentService = commentService;
         this.compilationService = compilationService;
     }
 
@@ -118,5 +123,27 @@ public class AdminController {
     public ResponseEntity<Object> updateCompilation(@PathVariable Long compId,
                                               @RequestBody UpdateCompilationDto updateDto) {
         return new ResponseEntity<>(compilationService.updateCompilation(compId, updateDto), HttpStatus.OK);
+    }
+
+    @GetMapping("/comments")
+    public ResponseEntity<Object> getCommentsByAdminWithFilter(
+            @RequestParam(required = false) String text,
+            @RequestParam(required = false) List<Long> commentators,
+            @RequestParam(required = false) List<Long> events,
+            @RequestParam(required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+            @RequestParam(required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
+            @RequestParam(defaultValue = "false") Boolean onlyBlocked,
+            @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
+            @RequestParam(defaultValue = "10") @Positive Integer size
+    ) {
+        return new ResponseEntity<>(commentService.getAllCommentsByAdmin(
+                text, commentators, events, rangeStart, rangeEnd, onlyBlocked, from, size), HttpStatus.OK);
+    }
+
+    @PatchMapping("/comments/{commentId}")
+    public CommentDto blockComment(@PathVariable Long commentId) {
+        return commentService.blockCommentByAdmin(commentId);
     }
 }
