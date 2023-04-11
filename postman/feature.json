@@ -1,0 +1,1487 @@
+{
+  "info": {
+    "_postman_id": "c36722a0-1987-4ca1-8ae2-1de3a378cdc2",
+    "name": "feature",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26808042"
+  },
+  "item": [
+    {
+      "name": "Add user 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание пользователя 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(64);\r",
+              "    pm.expect(jsonData.email, 'email').to.eql('ivanov@mail.ru');\r",
+              "    pm.expect(jsonData.name, 'name').to.eql('Иван Иванов');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Иван Иванов\",\r\n    \"email\": \"ivanov@mail.ru\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add user 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание пользователя 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(65);\r",
+              "    pm.expect(jsonData.email, 'email').to.eql('petrov@mail.ru');\r",
+              "    pm.expect(jsonData.name, 'name').to.eql('Петр Петров');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Петр Петров\",\r\n    \"email\": \"petrov@mail.ru\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add category 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание категории 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(56);\r",
+              "    pm.expect(jsonData.name, 'name').to.eql('Водный туризм');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Водный туризм\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/categories",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add event 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание события 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(39);\r",
+              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на байдарках');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"annotation\": \"Сплав на байдарках похож на полет\",\r\n  \"category\": 56,\r\n  \"description\": \"Сплав на байдарках похож на полет. На спокойной воде — это парение. На бурной, порожистой — выполнение фигур высшего пилотажа. И то, и другое дарят чувство обновления, феерические эмоции, яркие впечатления.\",\r\n  \"eventDate\": \"2024-12-31 15:10:05\",\r\n  \"location\": {\r\n    \"lat\": 56.754167,\r\n    \"lon\": 37.62\r\n  },\r\n  \"paid\": true,\r\n  \"participantLimit\": 1,\r\n  \"requestModeration\": true,\r\n  \"title\": \"Сплав на байдарках\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "events"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add event 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание события 2\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(40);\r",
+              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на плотах');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"annotation\": \"Сплав на плотах не похож на сплав на байдарках\",\r\n  \"category\": 56,\r\n  \"description\": \"Сплав на плотах 11111111111111111111111111111111111111111111111111\",\r\n  \"eventDate\": \"2024-12-31 15:10:05\",\r\n  \"location\": {\r\n    \"lat\": 56.754167,\r\n    \"lon\": 37.62\r\n  },\r\n  \"paid\": true,\r\n  \"participantLimit\": 5,\r\n  \"requestModeration\": true,\r\n  \"title\": \"Сплав на плотах\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "events"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add comment failed",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 409\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([409]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"Комментарий к неопубликованному событию\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/comments/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "65"
+            },
+            {
+              "key": "eventId",
+              "value": "39"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Publish event 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: публикация события 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(39);\r",
+              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на байдарках');\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/events/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "eventId",
+              "value": "39"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Publish event 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: публикация события 2\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(40);\r",
+              "    pm.expect(jsonData.title, 'title').to.eql('Сплав на плотах');\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/events/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "eventId",
+              "value": "40"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add comment 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание комментария 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(1);\r",
+              "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #1');\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(65);\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "    pm.expect(jsonData.created, 'created').not.null;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"Комментарий #1\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/comments/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "65"
+            },
+            {
+              "key": "eventId",
+              "value": "39"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add comment 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание комментария 2\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(2);\r",
+              "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #2');\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "    pm.expect(jsonData.created, 'created').not.null;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"Комментарий #2\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/comments/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "64"
+            },
+            {
+              "key": "eventId",
+              "value": "39"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add comment 3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание комментария 3\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(3);\r",
+              "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #3');\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(40);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(65);\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "    pm.expect(jsonData.created, 'created').not.null;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"Комментарий #3\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/comments/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "65"
+            },
+            {
+              "key": "eventId",
+              "value": "40"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add comment 4",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: создание комментария 4\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(4);\r",
+              "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #4');\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(40);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "    pm.expect(jsonData.created, 'created').not.null;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"Комментарий #4\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/comments/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "64"
+            },
+            {
+              "key": "eventId",
+              "value": "40"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Block comment 1 by Admin",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/admin/comments/:commentId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get blocked comment",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 404\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comment not existing",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 404\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "5000"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comment 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: получение комментария 2\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.id, 'id').to.eql(2);\r",
+              "    pm.expect(jsonData.text, 'text').to.eql('Комментарий #2');\r",
+              "    pm.expect(jsonData.event, 'event').to.eql(39);\r",
+              "    pm.expect(jsonData.commentator, 'commentator').to.eql(64);\r",
+              "    pm.expect(jsonData.state, 'state').to.eql('PUBLISHED');\r",
+              "    pm.expect(jsonData.created, 'created').not.null;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments by user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: получение комментариев пользователя 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length, 'количество комментариев').to.eql(2);\r",
+              "    pm.expect(jsonData[0].id, 'id').to.eql(2);\r",
+              "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #2');\r",
+              "    pm.expect(jsonData[0].commentator, 'commentator').to.eql(64);\r",
+              "    pm.expect(jsonData[1].id, 'id').to.eql(4);\r",
+              "    pm.expect(jsonData[1].text, 'text').to.eql('Комментарий #4');\r",
+              "    pm.expect(jsonData[1].commentator, 'commentator').to.eql(64);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/user/:userId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            "user",
+            ":userId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "64"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments by user not-exist",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 404\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/user/:userId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            "user",
+            ":userId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1000"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments for event",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: получение комментариев для события 1\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length, 'количество комментариев').to.eql(1);\r",
+              "    pm.expect(jsonData[0].id, 'id').to.eql(2);\r",
+              "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #2');\r",
+              "    pm.expect(jsonData[0].commentator, 'commentator').to.eql(64);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/event/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            "event",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "eventId",
+              "value": "39"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments for event not-exist",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 404\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/event/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            "event",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "eventId",
+              "value": "1000"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments by Admin with text",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: получение комментариев администраторов с поиском по тексту\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length, 'количество комментариев').to.eql(1);\r",
+              "    pm.expect(jsonData[0].id, 'id').to.eql(3);\r",
+              "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #3');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/admin/comments?text=3",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "text",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments by Admin with commentators",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: получение комментариев администраторов с поиском по комментатору\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length, 'количество комментариев').to.eql(1);\r",
+              "    pm.expect(jsonData[0].id, 'id').to.eql(3);\r",
+              "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #3');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/admin/comments?commentators=65",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "commentators",
+              "value": "65"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments by Admin with event",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: получение комментариев администраторов с поиском по событию\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length, 'количество комментариев').to.eql(2);\r",
+              "    pm.expect(jsonData[0].id, 'id').to.eql(4);\r",
+              "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #4');\r",
+              "    pm.expect(jsonData[1].id, 'id').to.eql(3);\r",
+              "    pm.expect(jsonData[1].text, 'text').to.eql('Комментарий #3');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/admin/comments?events=40",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "events",
+              "value": "40"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get comments by Admin only blocked",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Тест: получение комментариев администраторов с поиском заблокированных комментариев\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length, 'количество комментариев').to.eql(1);\r",
+              "    pm.expect(jsonData[0].id, 'id').to.eql(1);\r",
+              "    pm.expect(jsonData[0].text, 'text').to.eql('Комментарий #1');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/admin/comments?onlyBlocked=true",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "onlyBlocked",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete comment 4",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 204\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([204]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "64"
+            },
+            {
+              "key": "commentId",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get deleted comment 4",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус 404\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}

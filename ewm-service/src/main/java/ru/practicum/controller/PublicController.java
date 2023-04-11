@@ -13,6 +13,7 @@ import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.service.CategoryService;
 import ru.practicum.category.service.CategoryServiceImpl;
 import ru.practicum.client.StatClient;
+import ru.practicum.comments.service.CommentService;
 import ru.practicum.compilation.service.CompilationService;
 import ru.practicum.compilation.service.CompilationServiceImpl;
 import ru.practicum.event.service.EventService;
@@ -31,16 +32,18 @@ public class PublicController {
     private final CategoryService categoryService;
     private final EventService eventService;
     private final CompilationService compilationService;
+    private final CommentService commentService;
     private final StatClient statClient;
 
     @Autowired
     public PublicController(CategoryServiceImpl categoryService, EventServiceImpl eventService,
                             CompilationServiceImpl compilationService,
-                            StatClient statClient
+                            CommentService commentService, StatClient statClient
                             ) {
         this.categoryService = categoryService;
         this.eventService = eventService;
         this.compilationService = compilationService;
+        this.commentService = commentService;
         this.statClient = statClient;
     }
 
@@ -95,5 +98,20 @@ public class PublicController {
             @RequestParam(defaultValue = "10") @Positive Integer size
     ) {
         return new ResponseEntity<>(compilationService.getCompilationsByFilter(pinned, from, size), HttpStatus.OK);
+    }
+
+    @GetMapping("/comments/{commentId}")
+    public ResponseEntity<Object> getComment(@PathVariable Long commentId) {
+        return new ResponseEntity<>(commentService.getComment(commentId), HttpStatus.OK);
+    }
+
+    @GetMapping("/comments/user/{userId}")
+    public ResponseEntity<Object> getAllCommentsByUser(@PathVariable Long userId) {
+        return new ResponseEntity<>(commentService.getAllCommentsByUser(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/comments/event/{eventId}")
+    public ResponseEntity<Object> getAllCommentsForEvent(@PathVariable Long eventId) {
+        return new ResponseEntity<>(commentService.getAllCommentsForEvent(eventId), HttpStatus.OK);
     }
 }

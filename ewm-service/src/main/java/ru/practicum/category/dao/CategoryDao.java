@@ -32,6 +32,4 @@ public class CategoryDao {
         return categoryRepository.findById(id).orElseThrow(() ->
                 new NoObjectsFoundException("Категория  с id = " + id + " не существует"));
     }
-
-
 }

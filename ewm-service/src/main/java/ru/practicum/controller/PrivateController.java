@@ -3,6 +3,8 @@ package ru.practicum.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.comments.dto.NewCommentDto;
+import ru.practicum.comments.service.CommentService;
 import ru.practicum.event.dto.NewEventDto;
 import ru.practicum.event.dto.UpdateEventUserRequest;
 import ru.practicum.event.service.EventService;
@@ -19,11 +21,14 @@ public class PrivateController {
 
     private final EventService eventService;
     private final ParticipationRequestService participationRequestService;
+    private final CommentService commentService;
 
     public PrivateController(EventServiceImpl eventService,
-                             ParticipationRequestServiceImpl participationRequestService) {
+                             ParticipationRequestServiceImpl participationRequestService,
+                             CommentService commentService) {
         this.eventService = eventService;
         this.participationRequestService = participationRequestService;
+        this.commentService = commentService;
     }
 
     @PostMapping("/{userId}/events")
@@ -79,5 +84,17 @@ public class PrivateController {
             @RequestBody EventRequestStatusUpdateRequestDto dto) {
         return new ResponseEntity<>(participationRequestService.updateRequestStatus(userId, eventId, dto),
                 HttpStatus.OK);
+    }
+
+    @PostMapping("/{userId}/comments/{eventId}")
+    public ResponseEntity<Object> addComment(@PathVariable Long userId, @PathVariable Long eventId,
+                                             @RequestBody @Valid NewCommentDto dto) {
+        return new ResponseEntity<>(commentService.addComment(dto, userId, eventId), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{userId}/comments/{commentId}")
+    public ResponseEntity<Object> deleteComment(@PathVariable Long userId, @PathVariable Long commentId) {
+        commentService.deleteCommentByUser(userId, commentId);
+        return new ResponseEntity<>("Комментарий удален", HttpStatus.NO_CONTENT);
     }
 }
